@@ -3,19 +3,17 @@
     "name": "whatsClone",
     "slug": "whatsClone",
     "privacy": "public",
-    "sdkVersion": "32.0.0",
+    "sdkVersion": "31.0.0",
     "platforms": [
       "ios",
       "android"
     ],
+    "androidStatusBar": {
+      "backgroundColor": "#087653"
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
