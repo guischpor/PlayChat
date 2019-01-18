@@ -20,6 +20,9 @@ export default class FormLogin extends React.Component {
             <View>
                 <TextInput
                     placeholder='Username'
+                    style={{
+                        backgroundColor: ''
+                    }}
                 />
                 <TextInput
                     placeholder='Password'
@@ -38,7 +41,7 @@ export default class FormLogin extends React.Component {
                 activeOpacity={0.3}
                 onPress={() => false}
                 style={{
-                    borderRadius: 50,
+                    borderRadius: 12,
                 }}
             >
                 <Text style={styles.txtSingIn}>
@@ -54,14 +57,14 @@ export default class FormLogin extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#1f22cf',
         alignItems: 'center',
         justifyContent: 'center',
     },
     txtSingIn: {
         textAlign:'center',
         backgroundColor: '#0b7dfa',
-        borderRadius: 50,
+        borderRadius: 12,
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 18,
