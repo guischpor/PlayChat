@@ -147,6 +147,7 @@ export default class FormLogin extends React.Component {
                 </View>
                 <TouchableOpacity
                     style={{top: 20}}
+                    onPress={() => {Actions.forgotpass();}}
                 >
                     <Text style={styles.txtForgotPass}>Esqueci minha senha</Text>
                 </TouchableOpacity>

@@ -2,7 +2,7 @@ import React from 'react';
 import Welcome from './Welcome';
 import FormLogin from './FormLogin';
 import FormCadastro from './FormCadastro';
-
+import ForgotPass from './ForgotPass';
 
 import {
     Router,
@@ -29,6 +29,11 @@ const scenes = Actions.create(
         <Scene
             key='register'
             component={FormCadastro}
+            hideNavBar={true}
+        />
+        <Scene
+            key='forgotpass'
+            component={ForgotPass}
             hideNavBar={true}
         />
     </Scene>

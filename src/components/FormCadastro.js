@@ -161,25 +161,25 @@ export default class FormCadastro extends React.Component {
                         autoCapitalize='none'
                     />
                     <TouchableOpacity
-                            style={styles.eyeBtn}
-                            onPress={this.showPass.bind(this)}
-                        >
-                            {this.state.press === false ?
-                                <MaterialCommunityIcons
-                                    name="eye-off-outline"
-                                    size={25}
-                                    color={'rgb(150,150,150)'}
-                                    style={{backgroundColor: 'transparent'}}
-                                    color={'#9DAAEA'}
-                                />
-                            :
-                                <MaterialCommunityIcons
-                                    name="eye-outline"
-                                    size={25}
-                                    color={'#0b7dfa'}
-                                    style={{backgroundColor: 'transparent'}}
-                                />
-                            }
+                        style={styles.eyeBtn}
+                        onPress={this.showPass.bind(this)}
+                    >
+                        {this.state.press === false ?
+                            <MaterialCommunityIcons
+                                name="eye-off-outline"
+                                size={25}
+                                color={'rgb(150,150,150)'}
+                                style={{backgroundColor: 'transparent'}}
+                                color={'#9DAAEA'}
+                            />
+                        :
+                            <MaterialCommunityIcons
+                                name="eye-outline"
+                                size={25}
+                                color={'#0b7dfa'}
+                                style={{backgroundColor: 'transparent'}}
+                            />
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
