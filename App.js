@@ -7,7 +7,7 @@ import Route from './src/components/Route';
 export default class App extends React.Component {
   render() {
     return (
-     <Route />
+      <Route />
     );
   }
 }

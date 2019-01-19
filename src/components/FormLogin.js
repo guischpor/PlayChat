@@ -15,7 +15,9 @@ import {
     FontAwesome,
     MaterialCommunityIcons
 } from '@expo/vector-icons';
-
+import {
+    Actions,
+} from 'react-native-router-flux';
 
 const {width: WIDTH} = Dimensions.get('window');
 
@@ -57,7 +59,6 @@ export default class FormLogin extends React.Component {
             });
         }
     }
-
 
     render() {
         if (this.state.fontLoaded != true) {
@@ -155,7 +156,7 @@ export default class FormLogin extends React.Component {
                 <TouchableHighlight
                     underlayColor={'#0b7dfa'}
                     activeOpacity={0.3}
-                    onPress={() => false}
+                    onPress={() => {alert('Login')}}
                     style={{borderRadius: 8,}}
                 >
                     <Text style={styles.txtSingIn}>
@@ -170,6 +171,7 @@ export default class FormLogin extends React.Component {
                         alignItems: 'center',
                         justifyContent: 'center'
                     }}
+                    onPress={() => {Actions.register();}}
                 >
                     <Text style={styles.txtCriar}>Criar </Text>
                     <Text style={styles.txtConta}>nova </Text>

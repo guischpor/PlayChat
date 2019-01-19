@@ -16,6 +16,9 @@ import {
     MaterialCommunityIcons,
     Ionicons
 } from '@expo/vector-icons';
+import {
+    Actions,
+} from 'react-native-router-flux';
 
 
 const {width: WIDTH} = Dimensions.get('window');
@@ -59,7 +62,6 @@ export default class FormCadastro extends React.Component {
             });
         }
     }
-
 
     render() {
         if (this.state.fontLoaded != true) {
