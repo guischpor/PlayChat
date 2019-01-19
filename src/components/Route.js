@@ -22,7 +22,7 @@ const scenes = Actions.create(
             initial
         />
         <Scene
-            key='regloginister'
+            key='login'
             component={FormLogin}
             hideNavBar={true}
         />
