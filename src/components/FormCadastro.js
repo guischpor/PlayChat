@@ -24,7 +24,8 @@ import {connect} from 'react-redux';
 import {
     modificaEmail,
     modificaSenha,
-    modificaNome
+    modificaNome,
+    cadastraUsuario
 } from '../actions/AutenticacaoActions';
 
 const {width: WIDTH} = Dimensions.get('window');
@@ -64,6 +65,11 @@ class FormCadastro extends React.Component {
                 press: false
             });
         }
+    }
+
+    _cadastraUsuario() {
+        const {nome, email, senha} = this.props;
+        this.props.cadastraUsuario(nome, email, senha);
     }
 
     render() {
@@ -191,7 +197,7 @@ class FormCadastro extends React.Component {
                 <TouchableHighlight
                     underlayColor={'#0b7dfa'}
                     activeOpacity={0.3}
-                    onPress={() => false}
+                    onPress={() => this._cadastraUsuario()}
                     style={{borderRadius: 8,}}
                 >
                     <Text style={styles.txtRegister}>
@@ -212,11 +218,14 @@ const mapStateToProps = state => (
     }
 )
 export default connect (
-    mapStateToProps, {
+    mapStateToProps,
+    {
         modificaEmail,
         modificaSenha,
-        modificaNome
-    }) (FormCadastro);
+        modificaNome,
+        cadastraUsuario
+    }
+)(FormCadastro);
 
 const styles = StyleSheet.create({
     viewContainer: {
