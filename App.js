@@ -7,10 +7,13 @@ import {createStore} from 'redux';
 import Route from './src/components/Route';
 import reducers from './src/reducers/Index';
 
+const store = createStore(reducers);
+
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={createStore(reducers)}>
+      //<Provider store={createStore(reducers)}>
+      <Provider store={store}>
         <Route />
       </Provider>
     );

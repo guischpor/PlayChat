@@ -18,16 +18,17 @@ import {
 import {
     Actions,
 } from 'react-native-router-flux';
+import {connect} from 'react-redux';
 
 const {width: WIDTH} = Dimensions.get('window');
 
-export default class FormLogin extends React.Component {
+class FormLogin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             fontLoaded: false,
-            login: '',
-            pass: '',
+            email: '',
+            senha: '',
             showPass: true,
             press: false,
         }
@@ -96,8 +97,8 @@ export default class FormLogin extends React.Component {
                         placeholder='Username'
                         placeholderTextColor='#9DAAEA'
                         autoCapitalize='none'
-                        value={this.state.login}
-                        onChangeText={(login) => this.setState({login: login})}
+                        value={this.props.email}
+                        onChangeText={(email) => this.setState({email: email})}
                         style={styles.txtInputUser}
                     />
                 </View>
@@ -119,8 +120,8 @@ export default class FormLogin extends React.Component {
                         secureTextEntry={this.state.showPass}
                         placeholderTextColor='#9DAAEA'
                         style={styles.txtInputPass}
-                        value={this.state.pass}
-                        onChangeText={(pass) => this.setState({pass: pass})}
+                        value={this.props.senha}
+                        onChangeText={(senha) => this.setState({senha: senha})}
                         autoCapitalize='none'
                     />
                     <TouchableOpacity
@@ -184,6 +185,23 @@ export default class FormLogin extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => (
+    {
+        email: state.AutenticacaoReducer.email,
+        senha: state.AutenticacaoReducer.senha
+    }
+)
+export default connect(mapStateToProps, null)(FormLogin);
+
+
+// function mapStateToProps(state) {
+//     return {
+//         email: state.AutenticacaoReducer.email,
+//         senha: state.AutenticacaoReducer.senha
+//     };
+// }
+// export default connect(mapStateToProps)(FormLogin);
 
 const styles = StyleSheet.create({
     viewContainer: {
@@ -284,3 +302,7 @@ const styles = StyleSheet.create({
         position: 'absolute'
     },
 });
+
+
+
+
