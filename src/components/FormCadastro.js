@@ -19,18 +19,18 @@ import {
 import {
     Actions,
 } from 'react-native-router-flux';
-
+import {connect} from 'react-redux';
 
 const {width: WIDTH} = Dimensions.get('window');
 
-export default class FormCadastro extends React.Component {
+class FormCadastro extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             fontLoaded: false,
-            user: '',
+            nome: '',
             email: '',
-            pass: '',
+            senha: '',
             showPass: true,
             press: false,
         }
@@ -111,8 +111,8 @@ export default class FormCadastro extends React.Component {
                         placeholder='Username'
                         placeholderTextColor='#9DAAEA'
                         autoCapitalize='none'
-                        value={this.state.user}
-                        onChangeText={(user) => this.setState({user: user})}
+                        value={this.props.nome}
+                        onChangeText={(nome) => this.setState({nome: nome})}
                         style={styles.txtInputUser}
                     />
                 </View>
@@ -133,7 +133,7 @@ export default class FormCadastro extends React.Component {
                         placeholder='Email'
                         placeholderTextColor='#9DAAEA'
                         autoCapitalize='none'
-                        value={this.state.email}
+                        value={this.props.email}
                         onChangeText={(email) => this.setState({email: email})}
                         style={styles.txtInputEmail}
                     />
@@ -156,8 +156,8 @@ export default class FormCadastro extends React.Component {
                         secureTextEntry={this.state.showPass}
                         placeholderTextColor='#9DAAEA'
                         style={styles.txtInputPass}
-                        value={this.state.pass}
-                        onChangeText={(pass) => this.setState({pass: pass})}
+                        value={this.props.senha}
+                        onChangeText={(senha) => this.setState({senha: senha})}
                         autoCapitalize='none'
                     />
                     <TouchableOpacity
@@ -201,6 +201,14 @@ export default class FormCadastro extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => (
+    {   nome: state.AutenticacaoReducer.nome,
+        email: state.AutenticacaoReducer.email,
+        senha: state.AutenticacaoReducer.senha
+    }
+)
+export default connect(mapStateToProps, null)(FormCadastro);
 
 const styles = StyleSheet.create({
     viewContainer: {

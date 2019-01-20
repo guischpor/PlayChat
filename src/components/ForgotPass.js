@@ -10,19 +10,19 @@ import {
 
 import {Font} from 'expo';
 import {
-    MaterialIcons,
-    FontAwesome,
     MaterialCommunityIcons,
     Ionicons
 } from '@expo/vector-icons';
 import {
     Actions,
 } from 'react-native-router-flux';
+import {connect} from 'react-redux';
 
+import { modificaEmail} from '../actions/AutenticacaoActions';
 
 const {width: WIDTH} = Dimensions.get('window');
 
-export default class ForgotPass extends React.Component {
+class ForgotPass extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -97,8 +97,8 @@ export default class ForgotPass extends React.Component {
                         placeholder='Email'
                         placeholderTextColor='#9DAAEA'
                         autoCapitalize='none'
-                        value={this.state.email}
-                        onChangeText={(email) => this.setState({email: email})}
+                        value={this.props.email}
+                        onChangeText={email => this.props.modificaEmail(email)}
                         style={styles.txtInputEmail}
                     />
                 </View>
@@ -119,6 +119,17 @@ export default class ForgotPass extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => (
+    {
+        email: state.AutenticacaoReducer.email,
+    }
+)
+export default connect (
+    mapStateToProps, {
+        modificaEmail
+    }
+) (ForgotPass);
 
 const styles = StyleSheet.create({
     viewContainer: {

@@ -19,6 +19,11 @@ import {
     Actions,
 } from 'react-native-router-flux';
 import {connect} from 'react-redux';
+import {
+    modificaEmail,
+    modificaSenha
+} from '../actions/AutenticacaoActions';
+
 
 const {width: WIDTH} = Dimensions.get('window');
 
@@ -98,7 +103,7 @@ class FormLogin extends React.Component {
                         placeholderTextColor='#9DAAEA'
                         autoCapitalize='none'
                         value={this.props.email}
-                        onChangeText={(email) => this.setState({email: email})}
+                        onChangeText={email => this.props.modificaEmail(email)}
                         style={styles.txtInputUser}
                     />
                 </View>
@@ -121,7 +126,7 @@ class FormLogin extends React.Component {
                         placeholderTextColor='#9DAAEA'
                         style={styles.txtInputPass}
                         value={this.props.senha}
-                        onChangeText={(senha) => this.setState({senha: senha})}
+                        onChangeText={senha => this.props.modificaSenha(senha)}
                         autoCapitalize='none'
                     />
                     <TouchableOpacity
@@ -192,7 +197,12 @@ const mapStateToProps = state => (
         senha: state.AutenticacaoReducer.senha
     }
 )
-export default connect(mapStateToProps, null)(FormLogin);
+export default connect (
+    mapStateToProps, {
+        modificaEmail,
+        modificaSenha
+    }
+) (FormLogin);
 
 
 // function mapStateToProps(state) {
