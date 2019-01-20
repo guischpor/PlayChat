@@ -21,6 +21,12 @@ import {
 } from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
+import {
+    modificaEmail,
+    modificaSenha,
+    modificaNome
+} from '../actions/AutenticacaoActions';
+
 const {width: WIDTH} = Dimensions.get('window');
 
 class FormCadastro extends React.Component {
@@ -28,9 +34,6 @@ class FormCadastro extends React.Component {
         super(props);
         this.state = {
             fontLoaded: false,
-            nome: '',
-            email: '',
-            senha: '',
             showPass: true,
             press: false,
         }
@@ -112,7 +115,7 @@ class FormCadastro extends React.Component {
                         placeholderTextColor='#9DAAEA'
                         autoCapitalize='none'
                         value={this.props.nome}
-                        onChangeText={(nome) => this.setState({nome: nome})}
+                        onChangeText={nome => this.props.modificaNome(nome)}
                         style={styles.txtInputUser}
                     />
                 </View>
@@ -134,7 +137,7 @@ class FormCadastro extends React.Component {
                         placeholderTextColor='#9DAAEA'
                         autoCapitalize='none'
                         value={this.props.email}
-                        onChangeText={(email) => this.setState({email: email})}
+                        onChangeText={email => this.props.modificaEmail(email)}
                         style={styles.txtInputEmail}
                     />
                 </View>
@@ -157,7 +160,7 @@ class FormCadastro extends React.Component {
                         placeholderTextColor='#9DAAEA'
                         style={styles.txtInputPass}
                         value={this.props.senha}
-                        onChangeText={(senha) => this.setState({senha: senha})}
+                        onChangeText={senha => this.props.modificaSenha(senha)}
                         autoCapitalize='none'
                     />
                     <TouchableOpacity
@@ -208,7 +211,12 @@ const mapStateToProps = state => (
         senha: state.AutenticacaoReducer.senha
     }
 )
-export default connect(mapStateToProps, null)(FormCadastro);
+export default connect (
+    mapStateToProps, {
+        modificaEmail,
+        modificaSenha,
+        modificaNome
+    }) (FormCadastro);
 
 const styles = StyleSheet.create({
     viewContainer: {

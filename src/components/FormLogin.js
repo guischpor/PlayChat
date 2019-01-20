@@ -32,8 +32,6 @@ class FormLogin extends React.Component {
         super(props);
         this.state = {
             fontLoaded: false,
-            email: '',
-            senha: '',
             showPass: true,
             press: false,
         }
@@ -86,8 +84,8 @@ class FormLogin extends React.Component {
 
             <View style={styles.inputContainer}>
                 <View style={styles.inputStylesUser}>
-                    <MaterialIcons
-                        name="person"
+                    <MaterialCommunityIcons
+                        name="email-outline"
                         size={25}
                         color={'#9DAAEA'}
                         style={{
@@ -99,7 +97,7 @@ class FormLogin extends React.Component {
                         }}
                     />
                     <TextInput
-                        placeholder='Username'
+                        placeholder='Email'
                         placeholderTextColor='#9DAAEA'
                         autoCapitalize='none'
                         value={this.props.email}
