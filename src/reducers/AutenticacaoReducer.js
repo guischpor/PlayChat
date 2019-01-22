@@ -1,3 +1,5 @@
+import Toast from 'react-native-root-toast';
+
 const INITIAL_STATE = {
     nome: '',
     email: '',
