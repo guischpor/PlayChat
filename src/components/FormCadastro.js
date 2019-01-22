@@ -191,6 +191,17 @@ class FormCadastro extends React.Component {
                         }
                     </TouchableOpacity>
                 </View>
+                {this.props.erroCadastro == '' ?
+                    <View>
+                        <Text>{''}</Text>
+                    </View>
+                :
+                    <View style={styles.errorView}>
+                        <Text style={styles.textErro}>
+                            {this.props.erroCadastro}
+                        </Text>
+                    </View>
+                }
             </View>
 
             <View style={styles.btnContainer}>
@@ -214,7 +225,8 @@ class FormCadastro extends React.Component {
 const mapStateToProps = state => (
     {   nome: state.AutenticacaoReducer.nome,
         email: state.AutenticacaoReducer.email,
-        senha: state.AutenticacaoReducer.senha
+        senha: state.AutenticacaoReducer.senha,
+        erroCadastro: state.AutenticacaoReducer.erroCadastro
     }
 )
 export default connect (
@@ -325,4 +337,16 @@ const styles = StyleSheet.create({
         alignItems:'flex-end',
         position: 'absolute'
     },
+    errorView: {
+        backgroundColor: '#ff0000',
+        padding: 5,
+        top: 30,
+        borderRadius: 10,
+        alignItems: 'center'
+    },
+    textErro: {
+        color: '#fff',
+        fontSize: 14,
+        fontFamily: 'Lato-Regular',
+    }
 });

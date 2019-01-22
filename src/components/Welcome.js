@@ -67,21 +67,6 @@ export default class Welcome extends React.Component {
                         SIGN IN
                     </Text>
                 </TouchableHighlight>
-
-                <TouchableOpacity
-                    style={{
-                        flexDirection: 'row',
-                        top: 30,
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}
-                    onPress={() => {Actions.register();}}
-                >
-                    <Text style={styles.txtCriar}>Criar </Text>
-                    <Text style={styles.txtConta}>nova </Text>
-                    <Text style={styles.txtConta}>Conta</Text>
-                </TouchableOpacity>
-
             </View>
         </View>
         );
@@ -140,15 +125,5 @@ const styles = StyleSheet.create({
         padding: 14,
         width: WIDTH -70,
         fontFamily: 'Lato-Regular',
-    },
-    txtCriar: {
-        color: '#fff',
-        fontFamily: 'Lato-Regular',
-        fontSize: 15
-    },
-    txtConta: {
-        color: '#3D91EE',
-        fontFamily: 'Lato-Bold',
-        fontSize: 15
     },
 });

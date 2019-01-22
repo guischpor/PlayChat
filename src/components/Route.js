@@ -19,12 +19,12 @@ const scenes = Actions.create(
             Key='welcome'
             component={Welcome}
             hideNavBar={true}
-            initial
         />
         <Scene
             key='login'
             component={FormLogin}
             hideNavBar={true}
+            initial
         />
         <Scene
             key='register'

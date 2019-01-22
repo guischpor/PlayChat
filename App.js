@@ -1,14 +1,15 @@
 //React and React native import
 import React from 'react';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import firebase from 'firebase';
+import ReduxThunk from 'redux-thunk';
 
 //Components  and Elements local
 import Route from './src/components/Route';
 import reducers from './src/reducers/Index';
 
-const store = createStore(reducers);
+const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 export default class App extends React.Component {
 
