@@ -100,7 +100,7 @@ class FormCadastro extends React.Component {
                         }}
                     />
                 </TouchableHighlight>
-                <Text style={styles.txtTitle}>REGISTRATION</Text>
+                <Text style={styles.txtTitle}>CADASTRO</Text>
             </View>
             <View style={styles.inputContainer}>
                 <View style={styles.inputStylesUser}>
@@ -212,7 +212,7 @@ class FormCadastro extends React.Component {
                     style={{borderRadius: 8,}}
                 >
                     <Text style={styles.txtRegister}>
-                        REGISTER
+                        CADASTRAR
                     </Text>
                 </TouchableHighlight>
 
@@ -265,7 +265,8 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 19,
         top: 7,
-        left: 110
+        left: 130,
+        textAlign: 'center'
     },
     inputContainer : {
         flex: 2,

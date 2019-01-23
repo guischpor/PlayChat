@@ -16,7 +16,7 @@ import {
 
 const {width: WIDTH} = Dimensions.get('window');
 
-export default class Welcome extends React.Component {
+export default class BoasVindas extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

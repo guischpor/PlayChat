@@ -7,6 +7,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "base-64": "^0.1.0",
     "expo": "^32.0.0",
     "firebase": "^5.8.0",
     "react": "16.5.0",

@@ -161,7 +161,7 @@ class FormLogin extends React.Component {
                 <TouchableHighlight
                     underlayColor={'#0b7dfa'}
                     activeOpacity={0.3}
-                    onPress={() => {alert('Login')}}
+                    onPress={() => {false;}}
                     style={{borderRadius: 8,}}
                 >
                     <Text style={styles.txtSingIn}>

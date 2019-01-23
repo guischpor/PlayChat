@@ -1,5 +1,5 @@
 import React from 'react';
-import Welcome from './Welcome';
+import BoasVindas from './BoasVindas';
 import FormLogin from './FormLogin';
 import FormCadastro from './FormCadastro';
 import ForgotPass from './ForgotPass';
@@ -16,8 +16,8 @@ const scenes = Actions.create(
         key='root'
     >
         <Scene
-            Key='welcome'
-            component={Welcome}
+            key='boasvindas'
+            component={BoasVindas}
             hideNavBar={true}
         />
         <Scene
@@ -45,7 +45,6 @@ export default class Route extends React.Component {
             <Router
                 scenes={scenes}
             />
-            //<FormLogin/>
         );
     }
 }
