@@ -21,7 +21,8 @@ import {
 import {connect} from 'react-redux';
 import {
     modificaEmail,
-    modificaSenha
+    modificaSenha,
+    autenticarUsuario
 } from '../actions/AutenticacaoActions';
 
 
@@ -62,6 +63,10 @@ class FormLogin extends React.Component {
                 press: false
             });
         }
+    }
+    _autenticarUsuario() {
+        const { email, senha } = this.props;
+        this.props.autenticarUsuario({ email, senha });
     }
 
     render() {
@@ -161,7 +166,7 @@ class FormLogin extends React.Component {
                 <TouchableHighlight
                     underlayColor={'#0b7dfa'}
                     activeOpacity={0.3}
-                    onPress={() => {false;}}
+                    onPress={() => this._autenticarUsuario()}
                     style={{borderRadius: 8,}}
                 >
                     <Text style={styles.txtSingIn}>
@@ -198,7 +203,8 @@ const mapStateToProps = state => (
 export default connect (
     mapStateToProps, {
         modificaEmail,
-        modificaSenha
+        modificaSenha,
+        autenticarUsuario
     }
 ) (FormLogin);
 
