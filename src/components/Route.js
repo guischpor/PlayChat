@@ -26,6 +26,7 @@ const scenes = Actions.create(
             key='login'
             component={FormLogin}
             hideNavBar={true}
+            //initial
         />
         <Scene
             key='register'
