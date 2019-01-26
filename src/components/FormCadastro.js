@@ -6,7 +6,8 @@ import {
     TextInput,
     TouchableOpacity,
     TouchableHighlight,
-    Dimensions
+    Dimensions,
+    ActivityIndicator
 } from 'react-native';
 
 import {Font} from 'expo';
@@ -70,6 +71,26 @@ class FormCadastro extends React.Component {
     _cadastraUsuario() {
         const {nome, email, senha} = this.props;
         this.props.cadastraUsuario(nome, email, senha);
+    }
+
+    renderBtnCadastro() {
+        if(this.props.loading_Cadastro) {
+            return (
+                <ActivityIndicator size='large' color='#0b7dfa' />
+            )
+        }
+        return (
+            <TouchableHighlight
+                underlayColor={'#0b7dfa'}
+                activeOpacity={0.3}
+                onPress={() => this._cadastraUsuario()}
+                style={{borderRadius: 8,}}
+            >
+                <Text style={styles.txtRegister}>
+                    CADASTRAR
+                </Text>
+            </TouchableHighlight>
+        )
     }
 
     render() {
@@ -205,17 +226,7 @@ class FormCadastro extends React.Component {
             </View>
 
             <View style={styles.btnContainer}>
-                <TouchableHighlight
-                    underlayColor={'#0b7dfa'}
-                    activeOpacity={0.3}
-                    onPress={() => this._cadastraUsuario()}
-                    style={{borderRadius: 8,}}
-                >
-                    <Text style={styles.txtRegister}>
-                        CADASTRAR
-                    </Text>
-                </TouchableHighlight>
-
+                {this.renderBtnCadastro()}
             </View>
         </View>
         );
@@ -226,7 +237,8 @@ const mapStateToProps = state => (
     {   nome: state.AutenticacaoReducer.nome,
         email: state.AutenticacaoReducer.email,
         senha: state.AutenticacaoReducer.senha,
-        erroCadastro: state.AutenticacaoReducer.erroCadastro
+        erroCadastro: state.AutenticacaoReducer.erroCadastro,
+        loading_Cadastro: state.AutenticacaoReducer.loading_Cadastro
     }
 )
 export default connect (

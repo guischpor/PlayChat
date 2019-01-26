@@ -6,7 +6,8 @@ import {
     TextInput,
     TouchableOpacity,
     TouchableHighlight,
-    Dimensions
+    Dimensions,
+    ActivityIndicator
 } from 'react-native';
 
 import {Font} from 'expo';
@@ -67,6 +68,26 @@ class FormLogin extends React.Component {
     _autenticarUsuario() {
         const { email, senha } = this.props;
         this.props.autenticarUsuario({ email, senha });
+    }
+
+    renderBtnAcessar() {
+        if (this.props.loading_login) {
+            return (
+                <ActivityIndicator size='large' color='#0b7dfa'/>
+            )
+        }
+        return (
+            <TouchableHighlight
+                underlayColor={'#0b7dfa'}
+                activeOpacity={0.3}
+                onPress={() => this._autenticarUsuario()}
+                style={{borderRadius: 8,}}
+            >
+                <Text style={styles.txtSingIn}>
+                    SIGN IN
+                </Text>
+            </TouchableHighlight>
+        )
     }
 
     render() {
@@ -173,17 +194,7 @@ class FormLogin extends React.Component {
                 </TouchableOpacity>
             </View>
             <View style={styles.btnContainer}>
-                <TouchableHighlight
-                    underlayColor={'#0b7dfa'}
-                    activeOpacity={0.3}
-                    onPress={() => this._autenticarUsuario()}
-                    style={{borderRadius: 8,}}
-                >
-                    <Text style={styles.txtSingIn}>
-                        SIGN IN
-                    </Text>
-                </TouchableHighlight>
-
+                {this.renderBtnAcessar()}
                 <TouchableOpacity
                     style={{
                         flexDirection: 'row',
@@ -207,14 +218,15 @@ const mapStateToProps = state => (
     {
         email: state.AutenticacaoReducer.email,
         senha: state.AutenticacaoReducer.senha,
-        erroLogin : state.AutenticacaoReducer.erroLogin
+        erroLogin : state.AutenticacaoReducer.erroLogin,
+        loading_login: state.AutenticacaoReducer.loading_login
     }
 )
 export default connect (
     mapStateToProps, {
         modificaEmail,
         modificaSenha,
-        autenticarUsuario
+        autenticarUsuario,
     }
 ) (FormLogin);
 
