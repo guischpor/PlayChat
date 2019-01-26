@@ -347,7 +347,7 @@ const styles = StyleSheet.create({
     },
     textErro: {
         color: '#fff',
-        fontSize: 14,
+        fontSize: 12,
         fontFamily: 'Lato-Regular',
     }
 });

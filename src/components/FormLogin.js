@@ -133,27 +133,38 @@ class FormLogin extends React.Component {
                         autoCapitalize='none'
                     />
                     <TouchableOpacity
-                            style={styles.eyeBtn}
-                            onPress={this.showPass.bind(this)}
-                        >
-                            {this.state.press === false ?
-                                <MaterialCommunityIcons
-                                    name="eye-off-outline"
-                                    size={25}
-                                    color={'rgb(150,150,150)'}
-                                    style={{backgroundColor: 'transparent'}}
-                                    color={'#9DAAEA'}
-                                />
-                            :
-                                <MaterialCommunityIcons
-                                    name="eye-outline"
-                                    size={25}
-                                    color={'#0b7dfa'}
-                                    style={{backgroundColor: 'transparent'}}
-                                />
-                            }
+                        style={styles.eyeBtn}
+                        onPress={this.showPass.bind(this)}
+                    >
+                        {this.state.press === false ?
+                            <MaterialCommunityIcons
+                                name="eye-off-outline"
+                                size={25}
+                                color={'rgb(150,150,150)'}
+                                style={{backgroundColor: 'transparent'}}
+                                color={'#9DAAEA'}
+                            />
+                        :
+                            <MaterialCommunityIcons
+                                name="eye-outline"
+                                size={25}
+                                color={'#0b7dfa'}
+                                style={{backgroundColor: 'transparent'}}
+                            />
+                        }
                     </TouchableOpacity>
                 </View>
+                {this.props.erroLogin == '' ?
+                    <View>
+                        <Text>{''}</Text>
+                    </View>
+                :
+                    <View style={styles.errorView}>
+                        <Text style={styles.textErro}>
+                            {this.props.erroLogin}
+                        </Text>
+                    </View>
+                }
                 <TouchableOpacity
                     style={{top: 20}}
                     onPress={() => {Actions.forgotpass();}}
@@ -161,7 +172,6 @@ class FormLogin extends React.Component {
                     <Text style={styles.txtForgotPass}>Esqueci minha senha</Text>
                 </TouchableOpacity>
             </View>
-
             <View style={styles.btnContainer}>
                 <TouchableHighlight
                     underlayColor={'#0b7dfa'}
@@ -187,7 +197,6 @@ class FormLogin extends React.Component {
                     <Text style={styles.txtConta}>nova </Text>
                     <Text style={styles.txtConta}>Conta</Text>
                 </TouchableOpacity>
-
             </View>
         </View>
         );
@@ -197,7 +206,8 @@ class FormLogin extends React.Component {
 const mapStateToProps = state => (
     {
         email: state.AutenticacaoReducer.email,
-        senha: state.AutenticacaoReducer.senha
+        senha: state.AutenticacaoReducer.senha,
+        erroLogin : state.AutenticacaoReducer.erroLogin
     }
 )
 export default connect (
@@ -315,8 +325,16 @@ const styles = StyleSheet.create({
         alignItems:'flex-end',
         position: 'absolute'
     },
+    errorView: {
+        backgroundColor: '#ff0000',
+        padding: 5,
+        top: 5,
+        borderRadius: 10,
+        alignItems: 'center'
+    },
+    textErro: {
+        color: '#fff',
+        fontSize: 12,
+        fontFamily: 'Lato-Regular',
+    }
 });
-
-
-
-

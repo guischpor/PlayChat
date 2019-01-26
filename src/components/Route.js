@@ -3,6 +3,7 @@ import BoasVindas from './BoasVindas';
 import FormLogin from './FormLogin';
 import FormCadastro from './FormCadastro';
 import ForgotPass from './ForgotPass';
+import Principal from './Principal';
 
 import {
     Router,
@@ -34,6 +35,11 @@ const scenes = Actions.create(
         <Scene
             key='forgotpass'
             component={ForgotPass}
+            hideNavBar={true}
+        />
+        <Scene
+            key='principal'
+            component={Principal}
             hideNavBar={true}
         />
     </Scene>
