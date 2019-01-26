@@ -11,6 +11,7 @@ import {
     MaterialIcons,
 } from '@expo/vector-icons';
 import { TabBar } from 'react-native-tab-view';
+import {Actions} from 'react-native-router-flux';
 
 export default class TabBarMenu extends React.Component {
     constructor(props) {
@@ -47,21 +48,23 @@ export default class TabBarMenu extends React.Component {
                         <Text style={styles.txtTitlePlay}>PLAY </Text>
                         <Text style={styles.txtTitleChat}>CHAT</Text>
                     </View>
-                    <TouchableOpacity
-                        style={{left: 160}}
-                    >
-                        <MaterialIcons
-                            name="person-add"
-                            size={25}
-                            color={'#fff'}
-                            style={{backgroundColor: 'transparent'}}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={{left: 190}}
-                    >
-                        <Text style={styles.txtSair}>Sair</Text>
-                    </TouchableOpacity>
+                    <View style={{left: 160}}>
+                        <TouchableOpacity
+                            onPress={() => Actions.addcontato()}
+                        >
+                            <MaterialIcons
+                                name="person-add"
+                                size={25}
+                                color={'#fff'}
+                                style={{backgroundColor: 'transparent'}}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{left: 190}}>
+                        <TouchableOpacity>
+                            <Text style={styles.txtSair}>Sair</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 <TabBar
                     {...this.props}

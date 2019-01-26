@@ -34,7 +34,6 @@ export default class Principal extends React.Component {
 
     render() {
         return (
-
             <TabView
                 renderTabBar={this._renderTabBar}
                 navigationState={this.state}

@@ -4,6 +4,7 @@ import FormLogin from './FormLogin';
 import FormCadastro from './FormCadastro';
 import ForgotPass from './ForgotPass';
 import Principal from './Principal';
+import AdicionarContato from './AdicionarContato';
 
 import {
     Router,
@@ -25,7 +26,6 @@ const scenes = Actions.create(
             key='login'
             component={FormLogin}
             hideNavBar={true}
-            
         />
         <Scene
             key='register'
@@ -42,6 +42,11 @@ const scenes = Actions.create(
             component={Principal}
             hideNavBar={true}
             initial
+        />
+        <Scene
+            key='addcontato'
+            component={AdicionarContato}
+            hideNavBar={true}
         />
     </Scene>
 );
