@@ -93,7 +93,7 @@ class AdicionarContato extends React.Component {
                         placeholder='Email'
                         placeholderTextColor='#959595'
                         autoCapitalize='none'
-                        value={this.props.email}
+                        value={this.props.adiciona_contato_email}
                         onChangeText={email => this.props.modificaEmail(email)}
                         style={styles.txtInputEmail}
                     />
@@ -118,7 +118,7 @@ class AdicionarContato extends React.Component {
 
 const mapStateToProps = state => (
     {
-        email: state.AutenticacaoReducer.email,
+        adiciona_contato_email: state.AppReducer.adiciona_contato_email,
     }
 )
 export default connect (

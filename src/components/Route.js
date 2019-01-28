@@ -26,7 +26,7 @@ const scenes = Actions.create(
             key='login'
             component={FormLogin}
             hideNavBar={true}
-            //initial
+            initial
         />
         <Scene
             key='register'
@@ -42,7 +42,7 @@ const scenes = Actions.create(
             key='principal'
             component={Principal}
             hideNavBar={true}
-            initial
+            //initial
         />
         <Scene
             key='addcontato'
