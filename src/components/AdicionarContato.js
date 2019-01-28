@@ -18,7 +18,10 @@ import {
 } from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
-import { modificaEmail} from '../actions/AutenticacaoActions';
+import {
+    modificaAdiconaContatoEmail,
+    adicionaContato
+} from '../actions/AppActions';
 
 const {width: WIDTH} = Dimensions.get('window');
 
@@ -27,7 +30,6 @@ class AdicionarContato extends React.Component {
         super(props);
         this.state = {
             fontLoaded: false,
-            email: '',
         }
     }
 
@@ -94,7 +96,7 @@ class AdicionarContato extends React.Component {
                         placeholderTextColor='#959595'
                         autoCapitalize='none'
                         value={this.props.adiciona_contato_email}
-                        onChangeText={email => this.props.modificaEmail(email)}
+                        onChangeText={email => this.props.modificaAdiconaContatoEmail(email)}
                         style={styles.txtInputEmail}
                     />
                 </View>
@@ -103,7 +105,7 @@ class AdicionarContato extends React.Component {
                 <TouchableHighlight
                     underlayColor={'#0b7dfa'}
                     activeOpacity={0.3}
-                    onPress={() => false}
+                    onPress={() => this.props.adicionaContato(this.props.adiciona_contato_email)}
                     style={{borderRadius: 8,}}
                 >
                     <Text style={styles.txtBtn}>
@@ -123,7 +125,8 @@ const mapStateToProps = state => (
 )
 export default connect (
     mapStateToProps, {
-        modificaEmail
+        modificaAdiconaContatoEmail,
+        adicionaContato
     }
 ) (AdicionarContato);
 
