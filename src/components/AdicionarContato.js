@@ -17,6 +17,7 @@ import {
     Actions,
 } from 'react-native-router-flux';
 import {connect} from 'react-redux';
+import Toast from 'react-native-root-toast';
 
 import {
     modificaAdiconaContatoEmail,
@@ -101,6 +102,17 @@ class AdicionarContato extends React.Component {
                     />
                 </View>
             </View>
+            {this.props.erroCadastro == '' ?
+                <View>
+                    <Text>{''}</Text>
+                </View>
+            :
+                <View>
+                    <Text style={styles.textErro}>
+                        {this.props.erroCadastro}
+                    </Text>
+                </View>
+            }
             <View style={styles.btnContainer}>
                 <TouchableHighlight
                     underlayColor={'#0b7dfa'}
@@ -121,6 +133,7 @@ class AdicionarContato extends React.Component {
 const mapStateToProps = state => (
     {
         adiciona_contato_email: state.AppReducer.adiciona_contato_email,
+        erroCadastro: state.AppReducer.erroCadastro
     }
 )
 export default connect (
@@ -184,4 +197,17 @@ const styles = StyleSheet.create({
         width: WIDTH -70,
         fontFamily: 'Lato-Regular',
     },
+    errorView: {
+        backgroundColor: '#ff0000',
+        padding: 5,
+        top: 30,
+        borderRadius: 10,
+        alignItems: 'center',
+    },
+    textErro: {
+        color: '#ff0000',
+        fontSize: 16,
+        fontFamily: 'Lato-Regular',
+        textAlign: 'center'
+    }
 });

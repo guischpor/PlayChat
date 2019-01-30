@@ -1,5 +1,11 @@
+import firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
+import Toast from 'react-native-root-toast';
+import b64 from 'base-64';
+import _ from 'lodash';
 import {
     MODIFICA_ADICIONA_CONTATO_EMAIL,
+    ADICIONA_CONTATO_ERRO
 } from './Types';
 
 export const modificaAdiconaContatoEmail = email => {
@@ -10,9 +16,30 @@ export const modificaAdiconaContatoEmail = email => {
 }
 
 export const adicionaContato = email => {
-    console.log(email)
+    return dispatch => {
+        let emailB64 = b64.encode(email);
+        firebase.database().ref(`/contatos/${emailB64}`)
+            .once('value')
+            .then(snapshot => {
+                if (snapshot.val()) {
+                    //email do contato que existe
+                    const dadosUsuario = _.first(_.values(snapshot.val()));
+                    console.log(dadosUsuario);
 
-    return {
-        type: ''
+                    const {currentUser} =  firebase.auth();
+                    let emailUsuario64 = b64.encode(currentUser.email);
+                    firebase.database().ref(`/usuario_contatos/${emailUsuario64}`)
+                        .push({email, nome: dadosUsuario.nome})
+                        .then(() => console.log('Sucesso'))
+                        .catch(() => console.log(erro))
+                } else {
+                    dispatch(
+                        {
+                            type: ADICIONA_CONTATO_ERRO,
+                            payload: 'Email informado não corresponde a um usuário válido!'
+                        }
+                    )
+                }
+            })
     }
 }

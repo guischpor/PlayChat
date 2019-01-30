@@ -47,7 +47,7 @@ export const cadastraUsuario = (nome, email, senha) => {
         .then(user => {
             let emailB64 = b64.encode(email);
             const dataBase = firebase.database();
-            dataBase.ref(`/contatos/'${emailB64}`)
+            dataBase.ref(`/contatos/${emailB64}`)
             .push({nome})
             .then(value => cadastroUsuarioSucesso(dispatch) )
             }
