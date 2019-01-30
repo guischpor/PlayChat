@@ -47,6 +47,92 @@ class AdicionarContato extends React.Component {
         });
     }
 
+    renderAdicionarContato() {
+        if (!this.props.cadastroResultadoInclusao) {
+            return (
+                <View style={{flex: 1}}>
+                    <View style={styles.navBarStyle}>
+                        <View style={{marginLeft: 15}}>
+                            <TouchableHighlight
+                                underlayColor={'#161C5C'}
+                                activeOpacity={0.3}
+                                onPress= {() => {Actions.pop()}}
+                            >
+                                <Ionicons
+                                    name="ios-arrow-back"
+                                    size={30}
+                                    color={'#fff'}
+                                    style={{
+                                        backgroundColor: 'transparent',
+                                        justifyContent: 'center',
+                                    }}
+                                />
+                            </TouchableHighlight>
+                        </View>
+                        <View style={{marginLeft: 100}}>
+                            <Text style={styles.txtTitle}>Adicionar Contato</Text>
+                        </View>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <View style={styles.inputStylesEmail}>
+                            <MaterialCommunityIcons
+                                name="email-outline"
+                                size={25}
+                                color={'#959595'}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    position: 'absolute',
+                                    justifyContent: 'center',
+                                    top: 14,
+                                    left: 19
+                                }}
+                            />
+                            <TextInput
+                                placeholder='Email'
+                                placeholderTextColor='#959595'
+                                autoCapitalize='none'
+                                value={this.props.adiciona_contato_email}
+                                onChangeText={email => this.props.modificaAdiconaContatoEmail(email)}
+                                style={styles.txtInputEmail}
+                            />
+                        </View>
+                    </View>
+                    {this.props.erroCadastro == '' ?
+                        <View>
+                            <Text>{''}</Text>
+                        </View>
+                    :
+                        <View>
+                            <Text style={styles.textErro}>
+                                {this.props.erroCadastro}
+                            </Text>
+                        </View>
+                    }
+                    <View style={styles.btnContainer}>
+                        <TouchableHighlight
+                            underlayColor={'#0b7dfa'}
+                            activeOpacity={0.3}
+                            onPress={() => this.props.adicionaContato(this.props.adiciona_contato_email)}
+                            style={{borderRadius: 8,}}
+                        >
+                            <Text style={styles.txtBtn}>
+                                ADICIONAR CONTATO
+                            </Text>
+                        </TouchableHighlight>
+                    </View>
+                </View>
+            )
+        } else {
+            return (
+                <View style={styles.sucessoView}>
+                    <Text style={styles.textSucesso}>
+                        Cadastro realizado com sucesso!
+                    </Text>
+                </View>
+            )
+        }
+    }
+
     render() {
         if (this.state.fontLoaded != true) {
             return (
@@ -56,75 +142,7 @@ class AdicionarContato extends React.Component {
 
     return (
         <View style={styles.viewContainer}>
-            <View style={styles.navBarStyle}>
-                <View style={{marginLeft: 15}}>
-                    <TouchableHighlight
-                        underlayColor={'#161C5C'}
-                        activeOpacity={0.3}
-                        onPress= {() => {Actions.pop()}}
-                    >
-                        <Ionicons
-                            name="ios-arrow-back"
-                            size={30}
-                            color={'#fff'}
-                            style={{
-                                backgroundColor: 'transparent',
-                                justifyContent: 'center',
-                            }}
-                        />
-                    </TouchableHighlight>
-                </View>
-                <View style={{marginLeft: 100}}>
-                    <Text style={styles.txtTitle}>Adicionar Contato</Text>
-                </View>
-            </View>
-            <View style={styles.inputContainer}>
-                <View style={styles.inputStylesEmail}>
-                    <MaterialCommunityIcons
-                        name="email-outline"
-                        size={25}
-                        color={'#959595'}
-                        style={{
-                            backgroundColor: 'transparent',
-                            position: 'absolute',
-                            justifyContent: 'center',
-                            top: 14,
-                            left: 19
-                        }}
-                    />
-                    <TextInput
-                        placeholder='Email'
-                        placeholderTextColor='#959595'
-                        autoCapitalize='none'
-                        value={this.props.adiciona_contato_email}
-                        onChangeText={email => this.props.modificaAdiconaContatoEmail(email)}
-                        style={styles.txtInputEmail}
-                    />
-                </View>
-            </View>
-            {this.props.erroCadastro == '' ?
-                <View>
-                    <Text>{''}</Text>
-                </View>
-            :
-                <View>
-                    <Text style={styles.textErro}>
-                        {this.props.erroCadastro}
-                    </Text>
-                </View>
-            }
-            <View style={styles.btnContainer}>
-                <TouchableHighlight
-                    underlayColor={'#0b7dfa'}
-                    activeOpacity={0.3}
-                    onPress={() => this.props.adicionaContato(this.props.adiciona_contato_email)}
-                    style={{borderRadius: 8,}}
-                >
-                    <Text style={styles.txtBtn}>
-                        ADICIONAR CONTATO
-                    </Text>
-                </TouchableHighlight>
-            </View>
+            {this.renderAdicionarContato()}
         </View>
         );
     }
@@ -133,7 +151,8 @@ class AdicionarContato extends React.Component {
 const mapStateToProps = state => (
     {
         adiciona_contato_email: state.AppReducer.adiciona_contato_email,
-        erroCadastro: state.AppReducer.erroCadastro
+        erroCadastro: state.AppReducer.erroCadastro,
+        cadastroResultadoInclusao: state.AppReducer.cadastroResultadoInclusao
     }
 )
 export default connect (
@@ -147,6 +166,8 @@ const styles = StyleSheet.create({
     viewContainer: {
         flex: 1,
         backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     navBarStyle: {
         flexDirection: 'row',
@@ -206,6 +227,20 @@ const styles = StyleSheet.create({
     },
     textErro: {
         color: '#ff0000',
+        fontSize: 16,
+        fontFamily: 'Lato-Regular',
+        textAlign: 'center'
+    },
+    sucessoView: {
+        backgroundColor: '#009a00',
+        padding: 5,
+        top: 30,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    textSucesso: {
+        color: '#fff',
         fontSize: 16,
         fontFamily: 'Lato-Regular',
         textAlign: 'center'

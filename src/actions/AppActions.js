@@ -5,7 +5,8 @@ import b64 from 'base-64';
 import _ from 'lodash';
 import {
     MODIFICA_ADICIONA_CONTATO_EMAIL,
-    ADICIONA_CONTATO_ERRO
+    ADICIONA_CONTATO_ERRO,
+    ADICIONA_CONTATO_SUCESSO
 } from './Types';
 
 export const modificaAdiconaContatoEmail = email => {
@@ -30,8 +31,8 @@ export const adicionaContato = email => {
                     let emailUsuario64 = b64.encode(currentUser.email);
                     firebase.database().ref(`/usuario_contatos/${emailUsuario64}`)
                         .push({email, nome: dadosUsuario.nome})
-                        .then(() => console.log('Sucesso'))
-                        .catch(() => console.log(erro))
+                        .then(() => adicionaContatoSucesso(dispatch))
+                        .catch(() => adicionaContatoErro(erro.message, dispatch))
                 } else {
                     dispatch(
                         {
@@ -43,3 +44,28 @@ export const adicionaContato = email => {
             })
     }
 }
+
+const adicionaContatoErro = (erro, dispatch,) => (
+    dispatch (
+        {
+            type: ADICIONA_CONTATO_ERRO,
+            payload: erro
+        }
+    )
+)
+
+const adicionaContatoSucesso = dispatch => (
+    dispatch (
+        {
+            type: ADICIONA_CONTATO_SUCESSO,
+            payload: true
+        }
+    )
+)
+
+export const habilitaInclusaoContato = () => (
+    {
+        type: ADICIONA_CONTATO_SUCESSO,
+        payload: false
+    }
+)

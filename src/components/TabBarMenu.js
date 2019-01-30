@@ -12,8 +12,10 @@ import {
 } from '@expo/vector-icons';
 import { TabBar } from 'react-native-tab-view';
 import {Actions} from 'react-native-router-flux';
+import {connect} from 'react-redux';
+import {habilitaInclusaoContato} from '../actions/AppActions';
 
-export default class TabBarMenu extends React.Component {
+class TabBarMenu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -50,7 +52,7 @@ export default class TabBarMenu extends React.Component {
                     </View>
                     <View style={{left: 160}}>
                         <TouchableOpacity
-                            onPress={() => Actions.addcontato()}
+                            onPress={() => {Actions.addcontato(); this.props.habilitaInclusaoContato()} }
                         >
                             <MaterialIcons
                                 name="person-add"
@@ -76,6 +78,8 @@ export default class TabBarMenu extends React.Component {
         );
     }
 }
+
+export default connect (null, {habilitaInclusaoContato}) (TabBarMenu);
 
 const styles = StyleSheet.create ({
     viewTabBar: {
