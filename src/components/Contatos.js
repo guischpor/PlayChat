@@ -3,11 +3,13 @@ import {
     View,
     Text,
     Dimensions,
-    StyleSheet
+    StyleSheet,
+    ListView
 } from 'react-native';
 import {connect} from 'react-redux';
 import {Font} from 'expo';
 import {contatoUsuarioFetch} from '../actions/AppActions';
+import _ from 'lodash';
 
 const {width: WIDTH} = Dimensions.get('window');
 
@@ -17,10 +19,21 @@ class Contatos extends React.Component {
         this.state = {
             fontLoaded: false,
         }
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+        this.state={fonteDeDados: ds.cloneWithRows([
+            'Registro1',
+            'Registro2',
+            'Registro3',
+            'Registro4',
+        ])}
     }
 
     componentWillMount() {
         this.props.contatoUsuarioFetch();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps.contatos)
     }
 
     async componentDidMount() {
@@ -47,14 +60,21 @@ class Contatos extends React.Component {
         }
 
         return (
-            <View>
-                <Text>Contatos</Text>
-            </View>
+            <ListView
+                dataSource={this.state.fonteDeDados}
+                renderRow={data => <View><Text>{data}</Text></View>}
+            />
         );
     }
 }
 
-export default connect (null, {contatoUsuarioFetch}) (Contatos);
+mapStateToProps = state => {
+    const contatos = _.map(state.ListaContatosReducer, (val, uid) => {
+        return {...val, uid}
+    })
+    return {contatos}
+}
+export default connect (mapStateToProps, {contatoUsuarioFetch}) (Contatos);
 
 const styles = StyleSheet.create({
     viewContainer: {
