@@ -4,7 +4,8 @@ import {
     Text,
     Dimensions,
     StyleSheet,
-    ListView
+    ListView,
+    Image
 } from 'react-native';
 import {connect} from 'react-redux';
 import {Font} from 'expo';
@@ -19,21 +20,21 @@ class Contatos extends React.Component {
         this.state = {
             fontLoaded: false,
         }
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-        this.state={fonteDeDados: ds.cloneWithRows([
-            'Registro1',
-            'Registro2',
-            'Registro3',
-            'Registro4',
-        ])}
     }
 
     componentWillMount() {
         this.props.contatoUsuarioFetch();
+        this.criaFonteDeDados(this.props.contatos)
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps.contatos)
+        this.criaFonteDeDados(nextProps.contatos)
+
+    }
+
+    criaFonteDeDados (contatos) {
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+        this.fonteDeDados = ds.cloneWithRows(contatos)
     }
 
     async componentDidMount() {
@@ -61,8 +62,19 @@ class Contatos extends React.Component {
 
         return (
             <ListView
-                dataSource={this.state.fonteDeDados}
-                renderRow={data => <View><Text>{data}</Text></View>}
+                enableEmptySections
+                dataSource={this.fonteDeDados}
+                renderRow={data => (
+                    <View>
+                        <Image
+                            source={require('../images/avatarNeutro.png')}
+                            style={{height: 60, width: 60, borderRadius: 160}}
+                        />
+                        <Text>{data.nome}</Text>
+                        <Text>{data.email}</Text>
+                    </View>
+                )
+                }
             />
         );
     }
